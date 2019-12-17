@@ -7,10 +7,10 @@ class fedorainstaller():
     def __init__(self):
         pass
 
-    def burn(self,ufi, dsk, iso):
+    def burn(self,ufi, dsk, iso, folder):
         print("burning")
         dsk_path = '/dev/' + dsk
-        iso_path = '/home/sashreek/PycharmProjects/GCI/'+iso
+        iso_path = folder.get()+iso
         if ufi == 1:  # supports UEFI
             os.system(
                 'pkexec bash -c "umount ' + dsk_path + ' ; ' + "mkfs.vfat -n 'fedora_disk' " + dsk_path + ' ; ' + "cp -r " + iso_path + " " + dsk_path + '"')
@@ -57,25 +57,23 @@ class fedorainstaller():
         return syskey == cont_dict[nof]
 
 
-    def s_func(self,T,variable1,variable2,var):
+    def s_func(self,T,variable1,variable2,var,variable3):
         print("starting")
         variable1 = variable1.get()
         variable2 = variable2.get()
-        print(variable1)
-        print(variable2)
         if variable1 == 'KDE plasma desktop':
             self.download("https://download.fedoraproject.org/pub/fedora/linux/releases/31/Spins/x86_64/iso/Fedora-KDE-Live-x86_64-31-1.9.iso","Fedora-KDE-Live-x86_64-31-1.9.iso",T)
-            if self.checksusm('Fedora-KDE-Live-x86_64-31-1.9.iso'):
+            if self.checksusm('Fedora-KDE-Live-x86_64-31-1.9.iso',T):
                 dsk = variable2
-                self.burn(var.get(), dsk, 'Fedora-KDE-Live-x86_64-31-1.9.iso')
+                self.burn(var.get(), dsk, 'Fedora-KDE-Live-x86_64-31-1.9.iso',variable3)
             else:
                 T.delete(1.0, END)
                 T.insert(END, 'Checksum verification failed')
         if variable1 == 'XFCE desktop':
             self.download("https://download.fedoraproject.org/pub/fedora/linux/releases/31/Spins/x86_64/iso/Fedora-Xfce-Live-x86_64-31-1.9.iso","Fedora-Xfce-Live-x86_64-31-1.9.iso",T)
-            if self.checksusm('Fedora-Xfce-Live-x86_64-31-1.9.iso'):
+            if self.checksusm('Fedora-Xfce-Live-x86_64-31-1.9.iso',T):
                 dsk = variable2
-                self.burn(var.get(), dsk, 'Fedora-Xfce-Live-x86_64-31-1.9.iso')
+                self.burn(var.get(), dsk, 'Fedora-Xfce-Live-x86_64-31-1.9.iso',variable3)
             else:
                 T.delete(1.0, END)
                 T.insert(END, 'Checksum verification failed')
@@ -83,7 +81,7 @@ class fedorainstaller():
             self.download("https://download.fedoraproject.org/pub/fedora/linux/releases/31/Spins/x86_64/iso/Fedora-LXQt-Live-x86_64-31-1.9.iso","Fedora-LXQt-Live-x86_64-31-1.9.iso",T)
             if self.checksusm('Fedora-LXQt-Live-x86_64-31-1.9.iso',T):
                 dsk = variable2
-                self.burn(var.get(), dsk, 'Fedora-LXQt-Live-x86_64-31-1.9.iso')
+                self.burn(var.get(), dsk, 'Fedora-LXQt-Live-x86_64-31-1.9.iso',variable3)
             else:
                 T.delete(1.0, END)
                 T.insert(END, 'Checksum verification failed')
@@ -91,7 +89,7 @@ class fedorainstaller():
             self.download("https://download.fedoraproject.org/pub/fedora/linux/releases/31/Spins/x86_64/iso/Fedora-MATE_Compiz-Live-x86_64-31-1.9.iso","Fedora-MATE_Compiz-Live-x86_64-31-1.9.iso",T)
             if self.checksusm('Fedora-MATE_Compiz-Live-x86_64-31-1.9.iso',T):
                 dsk = variable2
-                self.burn(var.get(), dsk, 'Fedora-MATE_Compiz-Live-x86_64-31-1.9.iso')
+                self.burn(var.get(), dsk, 'Fedora-MATE_Compiz-Live-x86_64-31-1.9.iso',variable3)
             else:
                 T.delete(1.0, END)
                 T.insert(END, 'Checksum verification failed')
@@ -99,7 +97,7 @@ class fedorainstaller():
             self.download("https://download.fedoraproject.org/pub/fedora/linux/releases/31/Spins/x86_64/iso/Fedora-Cinnamon-Live-x86_64-31-1.9.iso","Fedora-Cinnamon-Live-x86_64-31-1.9.iso",T)
             if self.checksusm('Fedora-Cinnamon-Live-x86_64-31-1.9.iso',T):
                 dsk = variable2
-                self.burn(var.get(), dsk, 'Fedora-Cinnamon-Live-x86_64-31-1.9.iso')
+                self.burn(var.get(), dsk, 'Fedora-Cinnamon-Live-x86_64-31-1.9.iso',variable3)
             else:
                 T.delete(1.0, END)
                 T.insert(END, 'Checksum verification failed')
@@ -107,7 +105,7 @@ class fedorainstaller():
             self.download("https://download.fedoraproject.org/pub/fedora/linux/releases/31/Spins/x86_64/iso/Fedora-LXDE-Live-x86_64-31-1.9.iso","Fedora-LXDE-Live-x86_64-31-1.9.iso",T)
             if self.checksusm('Fedora-LXDE-Live-x86_64-31-1.9.iso',T):
                 dsk = variable2
-                self.burn(var.get(), dsk, 'Fedora-LXDE-Live-x86_64-31-1.9.iso')
+                self.burn(var.get(), dsk, 'Fedora-LXDE-Live-x86_64-31-1.9.iso', variable3)
             else:
                 T.delete(1.0, END)
                 T.insert(END, 'Checksum verification failed')
@@ -115,14 +113,14 @@ class fedorainstaller():
             self.download("https://download.fedoraproject.org/pub/fedora/linux/releases/31/Spins/x86_64/iso/Fedora-SoaS-Live-x86_64-31-1.9.iso","Fedora-SoaS-Live-x86_64-31-1.9.iso",T)
             if self.checksusm('Fedora-SoaS-Live-x86_64-31-1.9.iso',T):
                 dsk = variable2
-                self.burn(var.get(), dsk, 'Fedora-SoaS-Live-x86_64-31-1.9.iso')
+                self.burn(var.get(), dsk, 'Fedora-SoaS-Live-x86_64-31-1.9.iso', variable3)
             else:
                 T.delete(1.0, END)
                 T.insert(END, 'Checksum verification failed')
 
     def main(self):
         root = Tk()
-        root.geometry("820x720+700+100")
+        root.geometry("820x780+700+100")
         root.resizable(False, False)
         root.title("Fedora installer")
 
@@ -164,23 +162,31 @@ class fedorainstaller():
         w2.config(font=10)
 
         disk = Label(root, text='Does your system support UEFI :')
-        disk.config(font=('Ubuntu', 22))
-        disk.place(x=45, y=360)
+        disk.config(font=('Ubuntu', 20))
+        disk.place(x=45, y=345)
         l = Label(root, text='_' * 120)
-        l.place(x=0, y=460)
+        l.place(x=0, y=420)
 
         var = IntVar(root)
-        R1 = Radiobutton(root, text="Yes", variable=var, value=1, indicatoron=0, height=2, width=10, font=10)
-        R1.place(x=225, y=420)
-        R2 = Radiobutton(root, text="No", variable=var, value=0, indicatoron=0, height=2, width=10, font=10)
-        R2.place(x=495, y=420)
+        R1 = Radiobutton(root, text="Yes", variable=var, value=1, indicatoron=0, height=1, width=7, font=10)
+        R1.place(x=225, y=395)
+        R2 = Radiobutton(root, text="No", variable=var, value=0, indicatoron=0, height=1, width=7, font=10)
+        R2.place(x=495, y=395)
 
         T = Text(root, height=7, width=102)
-        T.place(x=0, y=570)
+        T.place(x=0, y=650)
 
-        s = Button(root, text="Start", height=2, width=10, font=10, command= lambda : self.s_func(T,variable1,variable2,var))
-        s.place(x=410, y=520, anchor=CENTER)
+        pth = Label(root, text='enter path to this python file :')
+        pth.config(font=('Ubuntu', 20))
+        pth.place(x=20, y=480)
+        variable3 = StringVar(root)
+        textbox = Entry(root,textvariable=variable3, width=40)
+        textbox.place(x=410,y=485)
+        textbox.config(font=16)
 
+        s = Button(root, text="Start", height=2, width=10, font=10,
+                   command=lambda: self.s_func(T, variable1, variable2, var, variable3))
+        s.place(x=410, y=600, anchor=CENTER)
 
         root.mainloop()
 
